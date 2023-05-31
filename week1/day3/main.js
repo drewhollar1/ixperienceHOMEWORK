@@ -22,3 +22,11 @@ ans = fibo(number1, number2);
 console.log(answer)
 
 //Pranav
+var i;
+var fib = [0, 1];
+console.log(0);
+console.log(1);
+for (i = 2; i <= 10; i++) {
+  fib[i] = fib[i - 2] + fib[i - 1];
+  console.log(fib[i]);
+}
