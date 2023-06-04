@@ -16,10 +16,30 @@
     <div class = "container my-5">
         <div class = "card p-4">
             <h1 class = "text-center">Task List</h1>
+            <hr class="solid">
+            <div class = text-center>Our simple task list</div>
             <form id="form">
-                <label class="form-label">Task</label>
-                <input id="taskInput" type="text" class="form-control">
+                <input id="taskInput" type="text" class="form-control mt-3" placeholder="Task">
+            
+            
+            <div class="d-grid mt-4">
+                <button class="btn btn-outline-primary" type="submit">
+                  Add Task
+                </button>
+            </div>
             </form>
+
+
+            <table class="table mt-3">
+                <thead>
+                  <tr>
+                    <th>Task</th>
+                    <th>Complete</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="tableBody" class="table-group-divider"></tbody>
+              </table>
         </div>
     </div>
 
