@@ -1,0 +1,1 @@
+I connected the library app (day 6 folder) to firebase
