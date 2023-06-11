@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Input from './components/Input';
 import Table from './components/Table';
+import { Book } from './models/Book';
 import BookService from './services/library-service'; // Update the path if necessary
 
 function App() {
@@ -27,7 +28,8 @@ function App() {
   }
 
   async function onBookCreate(title, author, isbn) {
-    const book = await BookService.createBook(new Book(title, author, isbn));
+    const newbook = new Book(title, author, isbn)
+    const book = await BookService.createBook(newbook);
     setBooks([...books, book]);
   }
 
@@ -37,7 +39,7 @@ function App() {
   }
 
   async function onBookEdit(isbn) {
-    await BookService.editBook(isbn);
+    const book = await BookService.editBook(isbn);
     setBooks([...books, book]);
   }
 
