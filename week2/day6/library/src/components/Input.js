@@ -1,4 +1,4 @@
-import { Book } from './models/book';
+import { Book } from '../models/Book';
 import React, { useState, useEffect } from 'react';
 export default function Input(props) {
     const [title, setTitle] = useState('');

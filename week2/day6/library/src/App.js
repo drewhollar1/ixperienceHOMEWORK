@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Input from './components/Input';
 import Table from './components/Table';
-import BookService from './services/BookService'; // Update the path if necessary
+import BookService from './services/library-service'; // Update the path if necessary
 
 function App() {
   const [books, setBooks] = useState([]);
