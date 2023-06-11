@@ -1,25 +1,13 @@
-import { Book } from '../models/Book';
+
 import React, { useState, useEffect } from 'react';
 export default function Input(props) {
-    const [title, setTitle] = useState('');
-    const [author, setAuthor] = useState('');
-    const [isbn, setIsbn] = useState('');
-
-    useEffect(() => {
-        if (props.incomingBook) {
-            setTitle(props.incomingBook.title);
-            setAuthor(props.incomingBook.author);
-            setIsbn(props.incomingBook.isbn);
-        }
-    }, [props.incomingBook]);
+    const [book, setBook] = useState('');
 
     function onSubmission(e) {
         e.preventDefault();
-        let inputBook = new Book (title, author, isbn);
-        props.onBookCreated(inputBook);
-        setTitle('');
-        setAuthor('');
-        setIsbn('');
+        
+        props.onBookCreate(book);
+        setBook('');
     }
 
     return (

@@ -21,9 +21,9 @@ export default function Table(props) {
                                 <td>{book.isbn}</td>
                                 <td>
                                 <button className="btn btn-danger bn-sm me-1"
-                                onClick={() => props.onBookDelete(book)}> Delete </button>
+                                onClick={() => props.onBookRemove(book.isbn)}> Delete </button>
                                 <button className="btn btn-warning bn-sm ms-1"
-                                onClick={() => props.onBookEdit(book)}> Edit </button>
+                                onClick={() => props.onBookEdit(book.isbn)}> Edit </button>
                                 </td>
                             </tr>
                         );

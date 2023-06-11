@@ -7,67 +7,51 @@ import BookService from './services/library-service'; // Update the path if nece
 
 function App() {
   const [books, setBooks] = useState([]);
-  const [incomingBook, setIncomingBook] = useState(null);
   
-  useEffect(() => {
-    fetchBooks();
-  }, []);
+  useEffect(
+    () => {
+      if (!books.length) {
+        onInitialLoad();
+      }
+    },
+    []
+  );
 
-  async function fetchBooks() {
-    const bookService = new BookService();
-    const fetchedBooks = await bookService.fetchBooks();
-    setBooks(fetchedBooks);
+  async function onInitialLoad() {
+    try {
+      const books = await BookService.fetchBooks();
+      setBooks(books);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
-  async function createBook(book) {
-    const bookService = new BookService();
-    const createdBook = await bookService.createBook(book);
-    setBooks([...books, createdBook]);
+  async function onBookCreate(title, author, isbn) {
+    const book = await BookService.createBook(new Book(title, author, isbn));
+    setBooks([...books, book]);
   }
 
-  async function updateBook(book) {
-    const bookService = new BookService();
-    await bookService.updateBook(book);
-    setBooks(prevBooks =>
-      prevBooks.map(prevBook => (prevBook.id === book.id ? book : prevBook))
-    );
+  async function onBookRemove(isbn) {
+    await BookService.deleteBook(isbn);
+    setBooks(books.filter((book) => book.isbn !== isbn));
   }
 
-  async function deleteBook(book) {
-    const bookService = new BookService();
-    await bookService.deleteBook(book.id);
-    setBooks(prevBooks =>
-      prevBooks.filter(prevBook => prevBook.id !== book.id)
-    );
+  async function onBookEdit(isbn) {
+    await BookService.editBook(isbn);
+    setBooks([...books, book]);
   }
-
-  function onBookCreated(book) {
-    setIncomingBook(null);
-    createBook(book);
-  }
-
-  function onBookDelete(book) {
-    deleteBook(book);
-  }
-
-  function onBookEdit(book) {
-    setIncomingBook(book);
-    deleteBook(book);
-  }
-  
 
   return (
     <div className="container my-5">
       <div className="card text-center p-4">
         <h1>Library</h1>
         <Input
-          incomingBook={incomingBook}
-          onBookCreated={onBookCreated}
+          onBookCreate={onBookCreate}
         ></Input>
         <Table
           books={books}
           onBookEdit={onBookEdit}
-          onBookDelete={onBookDelete}
+          onBookRemove={onBookRemove}
         ></Table>
       </div>
     </div>
