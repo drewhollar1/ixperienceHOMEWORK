@@ -16,7 +16,7 @@ class BookService {
 
     querySnapshot.forEach((doc) => {
       const data = doc.data();
-      const book = new Book(data.title, data.author, data.isbn);
+      const book = new Book(doc.id, data.title, data.author, data.isbn);
 
       books.push(book);
     });
@@ -32,11 +32,12 @@ class BookService {
       author: book.author,
       isbn: book.isbn,
     });
+    book.id = docRef.id;
     return book;
   }
 
   async editBook(book) {
-    const docRef = doc(db, this.collection, book.isbn);
+    const docRef = doc(db, this.collection, book.id);
 
     await updateDoc(docRef, {
       title: book.title,
@@ -47,8 +48,8 @@ class BookService {
     return book;
   }
 
-  async deleteBook(isbn) {
-    const docRef = doc(db, this.collection, isbn);
+  async deleteBook(bookId) {
+    const docRef = doc(db, this.collection, bookId);
 
     await deleteDoc(docRef);
   }

@@ -28,18 +28,18 @@ function App() {
   }
 
   async function onBookCreate(title, author, isbn) {
-    const newbook = new Book(title, author, isbn)
+    const newbook = new Book(null, title, author, isbn)
     const book = await BookService.createBook(newbook);
     setBooks([...books, book]);
   }
 
-  async function onBookRemove(isbn) {
-    await BookService.deleteBook(isbn);
-    setBooks(books.filter((book) => book.isbn !== isbn));
+  async function onBookRemove(bookId) {
+    await BookService.deleteBook(bookId);
+    setBooks(books.filter((book) => book.id !== bookId));
   }
 
-  async function onBookEdit(isbn) {
-    const book = await BookService.editBook(isbn);
+  async function onBookEdit(bookId) {
+    const book = await BookService.editBook(bookId);
     setBooks([...books, book]);
   }
 
