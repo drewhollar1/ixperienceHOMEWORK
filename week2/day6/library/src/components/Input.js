@@ -15,7 +15,7 @@ export default function Input(props) {
 
     function onSubmission(e) {
         e.preventDefault();
-        let inputBook = new Book (title, author, isbn);
+        let inputBook = new Book (null, title, author, isbn);
         props.onBookCreate(inputBook);
         setTitle('');
         setAuthor('');
