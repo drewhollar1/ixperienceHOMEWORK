@@ -27,10 +27,9 @@ function App() {
     }
   }
 
-  async function onBookCreate(title, author, isbn) {
-    const newbook = new Book(null, title, author, isbn)
-    const book = await BookService.createBook(newbook);
-    setBooks([...books, book]);
+  async function onBookCreate(book) {
+    const newbook = await BookService.createBook(book);
+    setBooks([...books, newbook]);
   }
 
   async function onBookRemove(bookId) {
